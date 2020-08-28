@@ -661,7 +661,7 @@ class SliceFigure:
         self.sync_btn.grid(row=0, column=2, sticky="E", padx=10)
         self.sync_tooltip = HoverToolTip(self.sync_btn, HOVER_BG, SMALL_FONT, "Sync Stacks\nPatient: " + self.figure_information['patient'])
 
-        #GRAPH
+        #GR
         #Graph Frame - label frame containing the figure & toolbar
         self.fig_frame = tk.LabelFrame(self.graph_frame, text="  {} {} ".format(self.intro_label_frm_txt, self.slice_name), background=HEADER_BG, foreground=FONT_COL)
         self.fig_frame.pack(padx=10, pady=(0, 10))
@@ -1484,7 +1484,7 @@ class Polygons(SliceFigure):
                     self.update_information("Intersection Found with another Polygon. Plot cannot be made", "warning")
                     result = messagebox.askquestion("Intersection Found", "An intersection with another polygon has been found and the plot has not been made.\n\nWould you like to override this?", icon='warning', default='no')
                     print("RESULT", result)
-                    #If there is no intersection - it is false            
+                    #If there is no intersection - it is false
                 if not intersector or result == "yes":
                     #Remove the current polygon from the graph
                     print(self.axis)
