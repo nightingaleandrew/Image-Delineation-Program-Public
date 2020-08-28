@@ -1,0 +1,30 @@
+[
+    {
+        "label": "Suspicious: PI-RAD 1",
+        "colour": "#d52ba6"
+    },
+    {
+        "label": "Suspicious: PI-RAD 2",
+        "colour": "#ff00ff"
+    },
+    {
+        "label": "Suspicious: PI-RAD 3",
+        "colour": "#ffff00"
+    },
+    {
+        "label": "Suspicious: PI-RAD 4",
+        "colour": "#8080c0"
+    },
+    {
+        "label": "Suspicious: PI-RAD 5",
+        "colour": "#ff00ff"
+    },
+    {
+        "label": "Anatomical",
+        "colour": "#80ffff"
+    },
+    {
+        "label": "andy needs a shave",
+        "colour": "#00ffff"
+    }
+]

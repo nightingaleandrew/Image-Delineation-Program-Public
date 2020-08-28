@@ -1,0 +1,66 @@
+[
+    {
+        "setting": "Precision",
+        "category": "polygons",
+        "configuable": true,
+        "default_value": 5,
+        "type": "number",
+        "task": "Change Precision"
+    },
+    {
+        "setting": "Line Thickness",
+        "category": "polygons",
+        "configuable": true,
+        "default_value": 4,
+        "type": "number",
+        "task": "Change Line Thickness"
+    },
+    {
+        "setting": "Unknown Tag Colour",
+        "category": "polygons",
+        "configuable": true,
+        "default_value": "#FFC0CB",
+        "type": "color",
+        "task": "Choose Unknown Tag Colour"
+    },
+    {
+        "setting": "Selected Polygon Colour",
+        "category": "polygons",
+        "configuable": true,
+        "default_value": "#0000FF",
+        "type": "color",
+        "task": "Choose Selected Polygon Colour"
+    },
+    {
+        "setting": "Selected Vertex Colour",
+        "category": "polygons",
+        "configuable": true,
+        "default_value": "#C2B280",
+        "type": "color",
+        "task": "Choose Selected Vertex Colour"
+    },
+    {
+        "setting": "Selected Vertex Size",
+        "category": "polygons",
+        "configuable": true,
+        "default_value": 125,
+        "type": "number",
+        "task": "Choose Selected Vertex Size"
+    },
+    {
+        "setting": "Figure Background",
+        "category": "polygons",
+        "configuable": true,
+        "default_value": "#C8C8C8",
+        "type": "color",
+        "task": "Choose Figure Background Colour"
+    },
+    {
+        "setting": "Default Tag",
+        "category": "tags",
+        "configuable": true,
+        "default_value": 0,
+        "type": "dropdown",
+        "task": "Choose Default Tag"
+    }
+]
