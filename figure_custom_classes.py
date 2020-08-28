@@ -149,6 +149,10 @@ class CustomToolbar(NavigationToolbar2Tk):
             self.mode = "ZOOM UNCLICKED"
         self.set_message(self.mode)
 
+    def save(self):
+        NavigationToolbar2Tk.ToolSaveFigure(self)
+        print("hello")
+
     def left_figure(self, event):
         self.mode = ""
         self.set_message(self.mode)

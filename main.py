@@ -8,10 +8,13 @@ import random, os, re, time, datetime, sqlite3, numpy as np, json
 #matplotlib imports
 import matplotlib
 matplotlib.use("TkAgg") #backend of matplotlib
+matplotlib.rcParams['savefig.format'] = 'png' #the saved image is using png
+
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
 #https://stackoverflow.com/questions/32188180/from-matplotlib-backends-import-tkagg-importerror-cannot-import-name-tkagg
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox, TextArea
 from matplotlib.figure import Figure
+
 #image imports
 from PIL import ImageTk, Image
 from PIL import Image as PIL_image, ImageTk as PIL_imagetk
@@ -671,17 +674,15 @@ class SliceFigure:
 
         #FIGURE, AXIS, CANVAS
         self.figure = Figure()
-        self.a = self.figure.add_subplot(111) #only one chart
+        self.a = self.figure.add_subplot(111) #only one chart. Other axis settings are within function reset_axis()
 
         self.figure.patch.set_facecolor(self.figure_background) #patches the facecolour of the figurebackground #https://stackoverflow.com/questions/60480832/how-to-put-color-behind-axes-in-python
         self.figure.subplots_adjust(left=0,right=1,bottom=0,top=1) #This reduces the size of the figure somewhat #https://stackoverflow.com/questions/20057260/how-to-remove-gaps-between-subplots-in-matplotlib
-
-
         self.canvas = FigureCanvasTkAgg(self.figure, self.fig_frame_inner) #would normally run plot.show() but show in tkinter window here
         self.canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=True, pady=10) #pack it to the window
-        self.fc = cidPress(self.figure) #class of cid for watching for button clicking
 
-        self.cidHover = cidHover(self.figure)
+        self.fc = cidPress(self.figure) #class of cid for watching for button clicking
+        self.cidHover = cidHover(self.figure) #For the hover over the graph
 
         #TOOLBAR
         self.toolbar = CustomToolbar(self.canvas, self.fig_frame) # self.toolbar = NavigationToolbar2Tk(self.canvas, self.graph_frame) = I have used a CustomToolbar
@@ -736,6 +737,7 @@ class SliceFigure:
 
         #load up First Figure
         self.create_figure(self.fig_frame)
+        self.canvas.get_default_filename = lambda: self.current_slice_name_getter() + "_img" #https://stackoverflow.com/questions/41680007/how-to-change-default-filename-from-matplotlib-navigationtoolbar-in-a-pyqt5-appl
 
         #Following is for Play/Pause functionality
         self.pause = False
@@ -760,6 +762,7 @@ class SliceFigure:
         slice_address = self.folder_selected + "/" + self.slice_list[self.current_position]
         slice = np.load(slice_address) #load the figure
         self.a.imshow(np.squeeze(slice), cmap='gray') #show the fig in monochrome
+        self.canvas.get_default_filename = lambda: self.current_slice_name_getter() + "_img"
 
         self.filename = self.folder_selected + "/" + self.current_slice_name_getter() + "_polygon_slice_notes.json" #filename for json data on polygons & polygon notes & also slice notes
         self.jsonFileReaderWriter = jsonFileReaderWriter(self.filename, 'polygon data') #recall jsonfilewriter instance
