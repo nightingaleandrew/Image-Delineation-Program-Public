@@ -3,6 +3,7 @@ from tkinter import ttk
 
 from widget_creator_classes import ButtonCreator
 
+#Hello 
 HOVER_BG = "#ffffe0"
 HEADER_BG = "#00004d"
 FONT_BG = "#FFFFFF"
@@ -113,7 +114,7 @@ class WindowLayout:
         self.header.pack(side="top", fill="x")
 
         page_title = tk.Label(self.header, text=title, font=font, foreground=FONT_COL, bg=HEADER_BG)      # Store this as an instance variable
-        page_title.pack(side=side, pady=20, padx=20) #20 is not used much in the program but gives a little more space 
+        page_title.pack(side=side, pady=20, padx=20) #20 is not used much in the program but gives a little more space
 
         return self.header
 
