@@ -44,6 +44,10 @@ Matplotlib
 #widget_creator_classes.py
 - Contains classes that look to create widgets such as InformationBox, ButtonCreator, Login
 
+#button_images.py
+- contains the image locations & zoom quantities for each image
+- Also contains information regarding reference and licence
+
 #figure_custom_classes.py
 - Contains classes that look to amend the figure and axes such as PolygonIntersector, cidPress
 
