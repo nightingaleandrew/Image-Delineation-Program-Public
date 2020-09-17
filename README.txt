@@ -6,6 +6,11 @@
 - This runs a tkinter interface that takes advantage of the Tkinter framework.
 - The password to enter is: " " (a single space)
 
+**Instructions**
+1) Please check and confirm the filename for loading the stacks within file_locations.py file. Please point this to the proc folder.
+    eg. r"C:/Users/Andrew/Documents/dissertation/data/proc"
+2) Run Main.py
+
 **IMPORTS USED**
 - Below are the imports I have used and would be best to have installed to be able to run the main.py file.
 Py
@@ -41,12 +46,21 @@ Matplotlib
 
 
 **.py FILE SUMMARIES IN DIR:**
-#widget_creator_classes.py
-- Contains classes that look to create widgets such as InformationBox, ButtonCreator, Login
+#styles.py
+- Contains the styles for the file including colourscheme and fonts. Please note tkinter ttk styles are within the MainApp class currently.
+
+#file_locations.py
+- Contains the locations for the tag file, settings files if they are moved. Also contains the main directory for finding stacks.
 
 #button_images.py
 - contains the image locations & zoom quantities for each image
 - Also contains information regarding reference and licence
+
+#main.py
+- central file that is run for the program to run. Contains MainApp, PageOne, StartPage, Polygons class etc & also central variables.
+
+#widget_creator_classes.py
+- Contains classes that look to create widgets such as InformationBox, ButtonCreator, Login
 
 #figure_custom_classes.py
 - Contains classes that look to amend the figure and axes such as PolygonIntersector, cidPress
@@ -54,18 +68,29 @@ Matplotlib
 **storage_classes.py
 - Contains classes that relate to storing data including jsonFileWriter and a Database class that I have kept for now
 
+**check_json_files.py
+- Classes that take in the format of a json file such as settings, tags & uses defaults hardcoded in if they are not in the correct format.
+
 **SetSettings.py
 - Contains a class relating to the settings and ensuring that the program runs even if the settings json file is not found or amended incorrectly.
 
-**TopLevelWin.py
+**window_classes.py
 - Contains classes that relate to layout of the application or top level windows
-
-**other.py
-- Contains classes or functions that are very general such as a Hex Validator or a colour chooser for images
 
 **other_windows.py
 - Contains classes regarding other classes such as EditNote or PolygonSettings
 
+**other.py
+- Contains classes or functions that are very general such as a Hex Validator or a colour chooser for images
+
+**PolygonTranslater
+- Contains the classes that are related to the polygon translation & synchronisation functionality - Translater & MatrixFinder
 
 **OTHER NOTES:**
 - All referencing regarding code are within the .py files where the code is first used.
+- Notes of Future Development are mentioned throughout the code - these are for phase II development. They relate to Trello board & Report GoingForwards
+
+**LEARNING**
+- For understanding tkinter and it's application using Python, I conducted a couple of tutorials before I started building. These included:
+#Source: Sentdex (2014) GUIs with tkinter (intermediate) [Video]. Available: https://www.youtube.com/playlist?list=PLQVvvaa0QuDclKx-QpC9wntnURXVJqLyk [Accessed: 01 July 2020].
+#Source: Codemy.com (2019) Python GUI's With TKinter [Video]. Available at: https://www.youtube.com/playlist?list=PLCC34OHNcOtoC6GglhF3ncJ5rLwQrLGnV [Accessed: 30 June 2020].

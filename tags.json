@@ -1,30 +1,36 @@
-[
-    {
-        "label": "Suspicious: PI-RAD 1",
-        "colour": "#d52ba6"
-    },
-    {
-        "label": "Suspicious: PI-RAD 2",
-        "colour": "#ff00ff"
-    },
-    {
-        "label": "Suspicious: PI-RAD 3",
-        "colour": "#ffff00"
-    },
-    {
-        "label": "Suspicious: PI-RAD 4",
-        "colour": "#8080c0"
-    },
-    {
-        "label": "Suspicious: PI-RAD 5",
-        "colour": "#ff00ff"
-    },
-    {
-        "label": "Anatomical",
-        "colour": "#80ffff"
-    },
-    {
-        "label": "andy needs a shave",
-        "colour": "#00ffff"
-    }
-]
+{
+    "tags": [
+        {
+            "label": "Suspicious: PI-RAD 2",
+            "colour": "#ff0080"
+        },
+        {
+            "label": "Suspicious: PI-RAD 3",
+            "colour": "#ffffff"
+        },
+        {
+            "label": "Suspicious: PI-RAD 4",
+            "colour": "#8080c0"
+        },
+        {
+            "label": "Suspicious: PI-RAD 5",
+            "colour": "#fec501"
+        },
+        {
+            "label": "Anatomical",
+            "colour": "#80ffff"
+        },
+        {
+            "label": "New tag",
+            "colour": "#7581ce"
+        },
+        {
+            "label": "Transvector Zone",
+            "colour": "#ff0080"
+        },
+        {
+            "label": "New Tag 2",
+            "colour": "#ffff80"
+        }
+    ]
+}

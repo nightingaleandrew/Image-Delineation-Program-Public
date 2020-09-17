@@ -1,52 +1,49 @@
-import tkinter as tk
-import tkinter.ttk as ttk
-import numpy as np, os, json
+#File for classes regarding the figure. For instance Hover, MouseClick or Intersector.
+
+#imports
+# import tkinter as tk
+# import tkinter.ttk as ttk
+import numpy as np, os
 
 import matplotlib
 matplotlib.use("TkAgg") #backend of matplotlib
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
-#https://stackoverflow.com/questions/32188180/from-matplotlib-backends-import-tkagg-importerror-cannot-import-name-tkagg
-from matplotlib.offsetbox import OffsetImage, AnnotationBbox, TextArea
+#Harry. (2020) from matplotlib.backends import _tkagg ImportError: cannot import name _tkagg [Online]. Available at: https://stackoverflow.com/questions/32188180/from-matplotlib-backends-import-tkagg-importerror-cannot-import-name-tkagg [Accessed 08 July 2020].
+from matplotlib.offsetbox import AnnotationBbox, TextArea
 from matplotlib.figure import Figure
-import random
-from tkinter import messagebox
 
-HOVER_BG = "#ffffe0"
-HEADER_BG = "#00004d"
-FONT_BG = "#FFFFFF"
-MAIN_BG = "#0066cc"
-FONT_COL = "#FFFFFF"
-ERROR_FONT = "red"
-
+#Class for clicking the CID (mouse click)- as the same cid is being used throughout different levels of classes
 class cidPress():
-    #Class for clicking the CID - as the same cid is being used throughout different levels of classes
-    #https://stackoverflow.com/questions/58322945/how-to-connect-and-disconnect-matplotlibs-event-handler-by-using-another-class
+    #ImportanceOfBeingErnest (2019) How to connect and disconnect matplotlib's event handler by using another class? [Online]. Available at  https://stackoverflow.com/questions/58322945/how-to-connect-and-disconnect-matplotlibs-event-handler-by-using-another-class [Accessed 07 July 2020].
     def __init__(self, figure):
         self.figure = figure
         self.cidpress = None #variable is declared as disconnect may be called before
 
-        #To connect the cid to the appropiate function, function is passed through eg. drawing or selecting polgyon
+    #To connect the cid to the appropiate function, function is passed through eg. drawing or selecting polgyon
     def connect(self, function):
         self.cidpress = self.figure.canvas.mpl_connect('button_press_event', function)
 
-        #To disconnect the cid
+    #To disconnect the cid or mouse click
     def disconnect(self):
         self.figure.canvas.mpl_disconnect(self.cidpress)
 
+#Class for hovering over the graph (mouse move)- with the intention of bringing up polygon data in a hover box
 class cidHover():
+    #Matplotlib. Event handling and picking [Online]. Available at: https://matplotlib.org/3.1.1/users/event_handling.html [Accessed 03 August 2020].
     def __init__(self, figure):
         self.figure = figure
         self.cidhover = None #variable is declared as disconnect may be called before
 
-        #To connect the cid to the appropiate function, function is passed through eg. hovering over a polygon
+    #To connect the cid to the appropiate function, function is passed through eg. hovering over a polygon
     def connect(self, function):
-        self.cidhover = self.figure.canvas.mpl_connect('motion_notify_event', function)
+        self.cidhover = self.figure.canvas.mpl_connect('motion_notify_event', function) #using the motion notify event
 
-        #To disconnect the cid
+    #To disconnect the cid
     def disconnect(self):
         self.figure.canvas.mpl_disconnect(self.cidhover)
 
-#class to see if the proposed line by the user intersects any existing polygons
+#class to see if the proposed line by the user intersects any existing polygons.
+#This is used for preventing an override between the polygons on the figure. User can look to override this if wanted
 class PolygonIntersector:
     def __init__(self, existing_polygons, polygon):
         self.existing_polygons = existing_polygons #co-ordinates of an existing polygons
@@ -66,7 +63,7 @@ class PolygonIntersector:
         lines = []
         i = 0
         co_ordinates = []
-        for x, y in polygon_co_ordinates: #i convert them all to tuples just for neatness (this is not essential)
+        for x, y in polygon_co_ordinates: #I convert them all to tuples just for neatness (this is not essential)
             co_ordinates.append((x, y))
         while i < len(co_ordinates):
             if i == len(co_ordinates) - 1: #The first co-ordinate needs to be added again as the polygon joins up
@@ -78,25 +75,24 @@ class PolygonIntersector:
 
     #calculates if there is an intersection between two lines
     def line_intersect(self, lineA, lineB):
-        #https://rosettacode.org/wiki/Find_the_intersection_of_two_lines#Python
+        #Rosettacode. Find the intersection of two lines [Online]. Available at: https://rosettacode.org/wiki/Find_the_intersection_of_two_lines#Python [Accessed 19 July 2020].
+
         #split up x and y co-ordinates for line A and line B
         Ax1, Ay1, Ax2, Ay2 = lineA[0][0], lineA[0][1], lineA[1][0], lineA[1][1]
         Bx1, By1, Bx2, By2 = lineB[0][0], lineB[0][1], lineB[1][0], lineB[1][1]
 
-        """ returns a (x, y) tuple or None if there is no intersection """
         # difference in y axis for Line b * difference in x axis for line A subtract difference in x axis for line B * difference in y axis for line A
         d = (By2 - By1) * (Ax2 - Ax1) - (Bx2 - Bx1) * (Ay2 - Ay1)
         if d:
             uA = ((Bx2 - Bx1) * (Ay1 - By1) - (By2 - By1) * (Ax1 - Bx1)) / d
             uB = ((Ax2 - Ax1) * (Ay1 - By1) - (Ay2 - Ay1) * (Ax1 - Bx1)) / d
         else:
-            return
+            return None #return None as none intersection
         if not(0 <= uA <= 1 and 0 <= uB <= 1):
-            return
+            return None #return none as no intersection
         x = Ax1 + uA * (Ax2 - Ax1)
         y = Ay1 + uA * (Ay2 - Ay1)
-
-        return x, y
+        return x, y #return x, y tuple of intersection pt
 
     #function that returns a result if there is an intersection or not
     def find_intersection(self, lineA): #proposed line is passed through here
@@ -108,13 +104,16 @@ class PolygonIntersector:
                     intersection = True #intersection is True if there is an intersection co-ordinate
         return intersection
 
-# custom toolbar with changed hover text
+# custom toolbar as I change the hover text for default buttons, I also change the text in bottom right if zoom clicked
+#This further customises the bottom right coordinates to create more space for buttons
 class CustomToolbar(NavigationToolbar2Tk):
-    #https://stackoverflow.com/questions/23172916/matplotlib-tkinter-customizing-toolbar-tooltips
-    def __init__(self, canvas_, parent_):
+    #ebarr. Matplotlib/Tkinter - customizing toolbar tooltips [Online]. Available at: https://stackoverflow.com/questions/23172916/matplotlib-tkinter-customizing-toolbar-tooltips [Accessed 29 July 2020].
+
+    def __init__(self, canvas_, parent_, mouse_click):
         self.clicked = None
+        self.mouse_click = mouse_click
         self.toolitems = (
-            ('Home', 'Reset Slice View', 'home', 'home'),
+            ('Home', 'Reset Slice View', 'home', 'home'), #My tooltips are 2nd here
             ('Back', 'Previous Slice', 'back', 'back'),
             ('Forward', 'Next Slice', 'forward', 'forward'),
             (None, None, None, None),
@@ -125,51 +124,71 @@ class CustomToolbar(NavigationToolbar2Tk):
             ('Save', 'Save Slice', 'filesave', 'save_figure'),
             )
         NavigationToolbar2Tk.__init__(self, canvas_, parent_)
-
+    #Pan Function for toolbar, I adjust it so it disconnects the mouse click eg. if draw was clicked & also flash a message bottom right to let user know.
     def pan(self):
-        #https://stackoverflow.com/questions/23172916/matplotlib-tkinter-customizing-toolbar-tooltips
         NavigationToolbar2Tk.pan(self)
 
         if self.clicked != "PAN":
             self.clicked = "PAN"
-            self.mode = "PAN CLICKED" #<--
+            self.mode = "PAN CLICKED"
         else:
             self.clicked = None
             self.mode = "PAN UNCLICKED"
-        self.set_message(self.mode)
+        self.set_message(self.mode) #the message in the bottom right hand corner to user
 
+        self.mouse_click.disconnect() #disconnect the mouse click on zoom click (edit or draw may be clicked)
+
+    #Zoom Function for toolbar, I adjust it so it disconnects the mouse click eg. if draw was clicked & also flash a message bottom right to let user know.
     def zoom(self):
         NavigationToolbar2Tk.zoom(self)
 
         if self.clicked != "ZOOM":
             self.clicked = "ZOOM"
-            self.mode = "ZOOM CLICKED" #<--- whatever you want to replace "zoom rect" goes here
+            self.mode = "ZOOM CLICKED" #Says "zoom rect" by default - Let User know Zoom is clicked
         else:
             self.clicked = None
-            self.mode = "ZOOM UNCLICKED"
-        self.set_message(self.mode)
+            self.mode = "ZOOM UNCLICKED" #Says "zoom rect" by default - Let User know Zoom is unclicked
+        self.set_message(self.mode) #the message in the bottom right hand corner to user
 
-    def save(self):
-        NavigationToolbar2Tk.ToolSaveFigure(self)
-        print("hello")
+        self.mouse_click.disconnect() #disconnect the mouse click on zoom click (edit or draw may be clicked)
 
+    #This is a function that unclicks pan or zoom if they are clicked. If draw is clicked then wanting to zoom in to continue. It will now not draw when figure is selected to zoom.
+    def unclick_pan_zoom(self):
+        if self.clicked != None:
+            if self.clicked == "ZOOM":
+                self.zoom() #invoke each method as in clicking it
+            elif self.clicked == "PAN":
+                self.pan()
+
+    #This is called by the main.py for when the cursor leaves the figure. It resets the message to nothing to let the user know that cursor is left
     def left_figure(self, event):
         self.mode = ""
         self.set_message(self.mode)
 
+    #For mouse move, I change the coordinates format. Have to make sure that it's formatted nicely so I structure it to 1.dp.
     def mouse_move(self, event):
         NavigationToolbar2Tk.mouse_move(self, event)
+        #ImportanceOfBeingErnest. matplotlib imshow formatting from cursor position [Online]. Available at: https://stackoverflow.com/questions/47082466/matplotlib-imshow-formatting-from-cursor-position [Accessed 01 September 2020].
         if event.inaxes and event.inaxes.get_navigate():
 
+            #This below can be made a lot better. Need to re-work to make it a lot cleaner
             data = [event.xdata, event.ydata] #I have done the quick algorithm on the left becuase it then always goes to 1.dp.
             formatted_data = []               #This looks better than a standard slice but also does not jig the figure around at all still even in ZOOM is clicked
             for item in data:
-                if str(item)[3] == ".":
-                    short_ver = str(item)[:5]
+
+                dp_index = str(item).find(".") #use this for reconstruction
+
+                if len(str(item)) > 3:
+                    if str(item)[3] == ".":
+                        if len(str(item)) < 5:
+                            short_ver = str(item)
+                        else:
+                            short_ver = str(item)[:5]
+                    else:
+                        short_ver = str(item)[:4]
                 else:
                     short_ver = str(item)[:4]
                 formatted_data.append(short_ver)
-
 
             self.mode = "[{}, {}]".format(formatted_data[0], formatted_data[1])
             self.set_message(self.mode)
@@ -181,7 +200,7 @@ class CustomToolbar(NavigationToolbar2Tk):
             self.mode = ""
             self.set_message(self.mode)
 
-
+#A class to show the polygon details in the hover label when the mouse moves above a polygon vertex
 class PolygonHover:
     def __init__(self, parent, polygon_info, precision, figure, axis, selected_colour): #takes in the polygon info, & then precision, figure, axis values
         self.parent = parent
@@ -192,24 +211,23 @@ class PolygonHover:
         self.selected_polygon_colour = selected_colour
 
     def hover(self, event):
-        #https://stackoverflow.com/questions/7908636/possible-to-make-labels-appear-when-hovering-over-a-point-in-matplotlib
-        hovered_over = False
-        if event.xdata != None:
+        # print("HOVER INFO", self.polygon_info)
+        #ImportanceOfBeingErnest (2017) Possible to make labels appear when hovering over a point in matplotlib? [Online]. Available at: https://stackoverflow.com/questions/7908636/possible-to-make-labels-appear-when-hovering-over-a-point-in-matplotlib [Accessed 03 August 2020].
+        hovered_over = False #Using a Boolean for hovered over true or not as it is on mouse move motion event, so need to destroy the bbox when not over it
+        if event.xdata != None: #None if the cursor is not on the figure.
             for polygon in self.polygon_info:
                 for x, y in polygon['co-ordinates']:
-                    if (np.abs(x - event.xdata) < self.precision) and (np.abs(y - event.ydata) < self.precision):
-                        print("IM HERE", self.polygon_info)
-                        hovered_over = True
-                        #clear all existing labels
-                        self.ax.artists.clear()
-                        string = "Id: {} \nTag: {} \nx: {} \ny: {}".format(polygon['id'], polygon['tag'], str(x)[:6], str(y)[:6]) #as coordinates can be quite long
-                        # string = "Id: 4 \nTag: Anatomical \nx: {} \ny: {}".format(str(x), str(y))
+                    if (np.abs(x - event.xdata) < self.precision) and (np.abs(y - event.ydata) < self.precision): #if hovered over a point part of a polygon
+
+                        #Build hover label with info
+                        hovered_over = True #change to true
+                        self.ax.artists.clear() #clear all existing labels
+                        string = "Slice: {} \nId: {} \nTag: {} \nx: {} \ny: {}".format(polygon['slice'], polygon['id'], polygon['tag'], str(x)[:6], str(y)[:6]) #as coordinates can be quite long
+
                         self.offsetbox = TextArea(string, minimumdescent=False)
-                        self.ab = AnnotationBbox(self.offsetbox, (0,0), xybox=(50., 50.), xycoords='data',
-                                boxcoords="offset points", pad=0.5)
-                                #Arrow Style: arrowprops=dict(arrowstyle='->, head_width=.5', color='white', linewidth=1, mutation_scale=.5
-                        # add it to the axes and make it invisible
-                        self.ax.add_artist(self.ab)
+                        self.ab = AnnotationBbox(self.offsetbox, (0,0), xybox=(50., 50.), xycoords='data', boxcoords="offset points", pad=0.5)
+                        #arrowprops=dict(arrowstyle='->, head_width=.5', color='white', linewidth=1, mutation_scale=.5 #Could use Arrow
+                        self.ax.add_artist(self.ab) #add box to axis
 
                         #change the colour of the lines
                         for line in polygon['lines']:
@@ -237,10 +255,7 @@ class PolygonHover:
                 if self.parent.selected_polygon != None:
                     self.parent.show_selected_plots(self.parent.selected_polygon['scatter_points'], self.ax.collections, self.selected_polygon_colour)
                     self.parent.show_selected_plots(self.parent.selected_polygon['lines'], self.ax.lines, self.selected_polygon_colour)
-                # for line in self.ax.lines:
-                #     line.set_color("red") #WILL NEED TO IMPORT TAG FILE LOADER COLOUR THING
-            #draw to graph canvas
-            # self.fig.canvas.draw_idle()
+
             self.fig.canvas.draw()
         else:
                 #clear existing labels
@@ -250,15 +265,14 @@ class PolygonHover:
             if self.parent.selected_polygon != None:
                 self.parent.show_selected_plots(self.parent.selected_polygon['scatter_points'], self.ax.collections, self.selected_polygon_colour)
                 self.parent.show_selected_plots(self.parent.selected_polygon['lines'], self.ax.lines, self.selected_polygon_colour)
-            # for line in self.ax.lines:
-            #     line.set_color("red") #WILL NEED TO IMPORT TAG FILE LOADER COLOUR THING
-    #draw to graph canvas
-            # self.fig.canvas.draw_idle()
+
             self.fig.canvas.draw()
 
+    #If selected polygon colour needs changing by settings change
     def change_selected_colour(self, new_col):
         self.selected_polygon_colour = new_col
 
+    #If precision value needs to be updated by settings change
     def update_precision_value(self, new_precision_val):
         self.precision = new_precision_val
 

@@ -1,6 +1,7 @@
-#Python file for images used
+#Python file for images used. I have contained them in here so they can be easily manipulated eg. zoom amount or file location
 
-#ALl images contain their references and also details of their license
+#ALl images contain their references and also details of their license use (I have ensured that all are available for commercial use)
+#Each entry in dict has name (relates to name used in main.py, file for location & zoom which is amount for PIL to see image clearly on Matplotlib toolbar button)
 
 custom_btn_images = [{"name": 'Jump to First Slice', "file": r"./images/start_icon.png", "zoom": 8},
                      #Source: Global Icons. Dj [Online]. [Accessed 08 August 2020]. Available at:http://www.myiconfinder.com/icon/next-pause-previous-rewind-forward-stop-play-back-eject-controls-music-button/4923
@@ -38,7 +39,13 @@ custom_btn_images = [{"name": 'Jump to First Slice', "file": r"./images/start_ic
                     #Source: Schoger, S. Tag Icon: Heroicons UI [Online]. [Accessed 08 August 2020]. Available at:https://www.iconfinder.com/icons/2867944/tag_icon
                     #license - MIT license stating free for commerical use
 
-                    {"name": 'Refresh Polygons', "file": r"./images/refresh_icon.png", "zoom": 22}
+                    {"name": 'Refresh Polygons', "file": r"./images/refresh_icon.png", "zoom": 22},
                     #Source: Designerz Base. Refresh, sync icon [Online]. [Accessed 08 August 2020]. Available at:https://www.iconfinder.com/icons/186390/refresh_sync_icon
                     #license - Mentions that it is "Free for commerical use"
+                    {"name": "Polygons Hidden", "file": r"./images/polygons_hidden_icon.png", "zoom": 24},
+                    #Source: Becris.  hide [Online]. [Accessed 13 September 2020]. Available at:https://www.flaticon.com/free-icon/private_876769?term=eye%20hide&page=1&position=5
+                    #license - Mentions that it is free to use for commerical purposes aslong as there is attribution which is above.
+                    {"name": "Create Mask", "file": r"./images/mask_icon_2.png", "zoom": 20}
+                    #Source: Canva. [Online]. [Accessed 05 September 2020]. Available at:https://www.canva.com/
+                    #license - Mentions that free icons on Cavna to create own icon are free to be used for commerical purposes https://about.canva.com/license-agreements/free-media/
                     ]
