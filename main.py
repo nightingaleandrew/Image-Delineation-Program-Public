@@ -50,10 +50,6 @@ from button_images import custom_btn_images
 from check_json_files import SetSettings, TagFileLoader
 
 #NON CONFIG SETTINGS
-#Storage ** In phase II I would set it up so this can be set centrally **
-#GOING FORWARDS - if needed. Setup db & test throughout adding/removing/editing records
-# MAKE_DB = False #**PLEASE DON'T MAKE TRUE AS WAS DISCONTINUED EARLY ON**
-# MAKE_JSON = True #for saving to json
 
 #TERMINOLOGY
 #I will gradually move the program so Slice is removed from terminology throughout. This is a post project development to allow it to be used for not just MRI Slices but any images
@@ -76,6 +72,12 @@ DISREGARD_TRANSLATED_POLYGONS_WITH_GT_3_SLICE_NUMS = False #if the slices for th
 #These are the settings that are used for the program while it is live such as line thickness & precision. The settings above (not including Password) will gradually be added in as program moves along
 settings_file = SetSettings(file_locations['settings'])
 SETTINGS = settings_file.settings
+
+#Storage ** In phase II I would set it up so this can be set centrally **
+#GOING FORWARDS - if needed. Setup db & test throughout adding/removing/editing records
+# MAKE_DB = False #**PLEASE DON'T MAKE TRUE AS WAS DISCONTINUED EARLY ON**
+# MAKE_JSON = True #for saving to json
+
 
 
 #CLASSES
