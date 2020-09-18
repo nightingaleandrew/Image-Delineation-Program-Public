@@ -589,7 +589,6 @@ class PageOne(tk.Frame):
                           matrix = slice_transformation.get_transformation_matrix() #using slice transformation for each slice
                           #USING FIRST TRANSFORMATION OF STACK A
                           # matrix = first_slice_matrix
-                          # print(matrix) #is matrix correct for slice? YES
 
                           if matrix != None: #If the matrix is found then returns a value, otherwise will return None
                             slice_data = {"slice_num": int(slice_name[-3:]), "polygon_data": polygon_data, "slice_transformation_matrix": matrix} #Slice name [-3:] gets just the number of the slice
@@ -603,11 +602,8 @@ class PageOne(tk.Frame):
                 # print(synchronised_stack)
 
                 #Change the button details for each stack & pass the syncrhonised details into each figure
-                print("turns up")
                 # try:
                 for figure in figures_to_be_synced:
-                    print("SYNC_F", figure)
-                    print(figure.figure_information)
                     figure.sync_btn['text'] = 'Tab Synced' #change button name
                     figure.sync_btn['background'] = colour_scheme['error_font'] #change button colour so it's similar to being 'live'
                     figure.sync_btn['foreground'] = colour_scheme['font_col']
