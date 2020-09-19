@@ -1890,7 +1890,7 @@ class Polygons(SliceFigure):
     def check_if_polygons_present(self):
         polygons = self.get_total_polygons()
         for button in self.polygon_buttons:
-            if button['description'] == "select":
+            if button['description'] == "select" or button['description'] == "hide":
                 if polygons == 0: #if there are no polygons on screen after deletion for instance
                     button['widget']['state'] = "disabled"
                 else:
