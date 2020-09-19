@@ -4,8 +4,8 @@
 
 
                 #Refers to the file where the tags for the polygons are saved. The tags in this file are loaded into the program
-file_locations = {"tags": r".\tags.json",
+file_locations = {"tags": r"./tags.json",
                 #Refers to the file where the settings for the polygons are located. The settings arr loaded into the program
-                "settings": r".\settings.json",
-                #Refers to where the load stacks button open file dialog points to. The stacks can then be loaded in from there. 
+                "settings": r"./settings.json",
+                #Refers to where the load stacks button open file dialog points to. The stacks can then be loaded in from there.
                 "stacks_directory": r"C:/Users/Andrew/Documents/dissertation/data/proc"}
