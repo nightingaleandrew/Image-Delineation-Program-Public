@@ -421,6 +421,13 @@ class PageOne(tk.Frame):
 
             #if there are allowed files in the folder
             if len(possible_images) > 0:
+                #On Windows, files are loaded in order they are in dir. In linux this is not the case therefore I have sorted the list by string
+                #this is assuming that the slice names are the same apart from slice name.
+                #Future Development: do sorting upon slice number rather than whole string
+                #Eli Courtwright and skolima. How to sort a list of strings? (2011) [Online]. Available at: https://stackoverflow.com/questions/36139/how-to-sort-a-list-of-strings [Accessed: 19 September 2020]
+                possible_images = sorted(possible_images)
+
+
                 slice_address_segments = re.split("/", folder_selected) #split directory address as patient number, scan type etc are labelled by folder names
 
                 self.create_tab(slice_address_segments, notebook_frame, folder_selected, possible_images)  #create the tab with the segements from the file
