@@ -1,40 +1,48 @@
 {
     "tags": [
         {
+            "label": "Suspicious: PI-RAD 1",
+            "colour": "#FF0000"
+        },
+        {
             "label": "Suspicious: PI-RAD 2",
-            "colour": "#ff0080"
+            "colour": "#FF0000"
         },
         {
             "label": "Suspicious: PI-RAD 3",
-            "colour": "#ffffff"
+            "colour": "#FF0000"
         },
         {
             "label": "Suspicious: PI-RAD 4",
-            "colour": "#8080c0"
+            "colour": "#FF0000"
         },
         {
             "label": "Suspicious: PI-RAD 5",
-            "colour": "#fec501"
+            "colour": "#FF0000"
         },
         {
-            "label": "Anatomical",
-            "colour": "#80ffff"
+            "label": "WP",
+            "colour": "#008000"
         },
         {
-            "label": "New tag",
-            "colour": "#7581ce"
+            "label": "CG",
+            "colour": "#FFFF00"
         },
         {
-            "label": "Transvector Zone",
-            "colour": "#ff0080"
+            "label": "PZ",
+            "colour": "#FFA500"
         },
         {
-            "label": "New Tag 2",
-            "colour": "#ffff80"
+            "label": "PG",
+            "colour": "#800080"
         },
         {
-            "label": "not at all -5",
-            "colour": "#76ed54"
+            "label": "NC",
+            "colour": "#00FFFF"
+        },
+        {
+            "label": "Other",
+            "colour": "#ffffff"
         }
     ]
 }
