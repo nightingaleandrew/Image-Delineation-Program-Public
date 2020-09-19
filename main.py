@@ -731,6 +731,7 @@ class SliceFigure:
 
         self.polygon_tag_lab = tk.Label(self.polygon_tag_frame, text="Current Tag: ", background=colour_scheme['header_bg'], fg=colour_scheme['font_col']) #current assigned tag for drawing, can be changed by default in settings
         self.polygon_tag_lab.grid(row=0, column=0, sticky="W")
+        self.polygon_tag_tooltip = HoverToolTip(self.polygon_tag_lab, colour_scheme['hover_bg'], fonts['small_font'], "Choose tag for new polygon") #to make the current tag a little more understandable. That this is the tag for any new polygons to be drawn
 
         self.polygon_tag_choice = ttk.Combobox(self.polygon_tag_frame, values=self.polygon_tags) #Use ttk. combo box as looks more appealing
         self.polygon_tag_choice.current(self.default_tag_index) #current value in the combo box
