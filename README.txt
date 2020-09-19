@@ -87,6 +87,24 @@ Matplotlib
 **PolygonTranslater
 - Contains the classes that are related to the polygon translation & synchronisation functionality - Translater & MatrixFinder
 
+
+** KNOWN ISSUES/BUGS ** (ids link to report Going Forwards section)
+- ID 1: Hover tooltip for polygon information still shows when polygons hidden on slice
+  Details: When the polygons have been hidden from view, the hover tooltips are still apparent on the figure if the vertex position is hovered over.
+
+- ID 2: Stack stated as synchronised when not synchronised
+  Details: When the synchronisation has failed for a particular stack but other target stacks available are synchronised then the button of the failed stack still remains synchronised status.
+
+- ID 3: Adding, Removing, Editing polygon under synchronisation does not replicate changes in synchronised target stacks unless there is de-sync & re-sync. 
+  Details: If the radiologist edits, adds or removes a polygon from the synchroniser stack then the polygon does not replicate in the target stacks. This change does not even happen under figure refresh of the target stack. It requires a cancellation of the synchronisation & a re-synchronisation.
+
+- ID 4: numpy.linalg.LinAlgError occurs when synchronising stacks
+  Details: If two stacks are loaded for instance t2-axial & adc-res and synchronise is clicked on t2-axial is clicked then a “numpy.linalg.LinAlgError: Last 2 dimensions of the array must be square error”
+
+- ID 5: Not possible to change point location in certain cases when editing vertex location.
+  Details: Upon editing the vertex of a polygon, when selected the new plot position, the plot does not move. Message updates to say it was successful.
+
+
 **OTHER NOTES:**
 - All referencing regarding code are within the .py files where the code is first used.
 - Notes of Future Development are mentioned throughout the code - these are for phase II development. They relate to Trello board & Report GoingForwards
