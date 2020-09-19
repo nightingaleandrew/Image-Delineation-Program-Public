@@ -789,12 +789,13 @@ class SliceFigure:
         custom_btn_frame.pack(side = "left")
 
         #Custom Buttons stored in a dict with name, function, default state
+        #Any changes to Name key need to be also changed in button_images.py file
         self.custom_btns = [{"name": 'Jump to First Slice', "text": "1", "padding": (5, 1), "description": 'start', "dlft_state": "normal", "command": lambda name="start": self.click_tb_btn('start')},
                             {"name": 'Jump to Last Slice', "text": "END", "padding": (1, 2), "description": 'end', "dlft_state": "normal", "command": lambda: self.click_tb_btn('end')},
                             # {"name": 'Play Slice Slideshow', "text": "PLY", "padding": (5, 5), "description": 'play', "dlft_state": "normal", "command": lambda: self.click_tb_btn('play')},
                             {"name": "Draw Polygon", "text": "DRW", "padding": (0, 2), "description": 'draw', "dlft_state": "normal", "command": lambda name="draw": self.click_tb_btn("draw")},
                             {"name": "Select Polygon", "text": "SEL", "padding": (0, 2), "description": 'select', "dlft_state": "disabled", "command": lambda name="select": self.click_tb_btn("select")},
-                            {"name": "Edit Polygon", "text": "EDIT", "padding": (0, 2), "description": 'edit', "dlft_state": "disabled", "command": None},
+                            {"name": "Edit Polygon Vertex Locations", "text": "EDIT", "padding": (0, 2), "description": 'edit', "dlft_state": "disabled", "command": None},
                             {"name": "Delete Polygon", "text": "BIN", "padding": (0, 2), "description": 'delete', "dlft_state": "disabled", "command": None},
                             {"name": "Hide Polygons", "text": "ON", "padding": (0, 2), "description": 'hide', "dlft_state": "normal", "command": lambda name="hide": self.click_tb_btn("hide")},
                             {"name": "Edit Polygon Tag", "text": "TAG", "padding": (0, 2), "description": 'edit_tag', "dlft_state": "disabled", "command": None},

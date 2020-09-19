@@ -23,7 +23,7 @@ custom_btn_images = [{"name": 'Jump to First Slice', "file": r"./images/start_ic
                     #Source: Boyko, I. Arrows, cursor, move, pointer icon [Online]. [Accessed 08 August 2020]. Available at:https://www.iconfinder.com/icons/309088/arrows_cursor_move_pointer_icon
                     #license - Free Icon by Creative Commons
 
-                    {"name": 'Edit Polygon', "file": r"./images/edit_icon.png", "zoom": 24},
+                    {"name": 'Edit Polygon Vertex Locations', "file": r"./images/edit_icon.png", "zoom": 24},
                     #Source: Schoger, S. Tag Icon: Heroicons UI [Online]. [Accessed 08 August 2020]. Available at:https://www.iconfinder.com/icons/2867890/edit_icon
                     #license - MIT license stating free for commerical use
 
