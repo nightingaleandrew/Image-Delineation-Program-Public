@@ -18,6 +18,7 @@ Py
 - import csv, json
 - import random, re, os
 - import time, datetime
+- import cv2 (opencv)
 
 Tk
 - import tkinter (from tkinter, ttk, messagebox, colorchooser, filedialog are imported)

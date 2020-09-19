@@ -31,6 +31,10 @@
         {
             "label": "New Tag 2",
             "colour": "#ffff80"
+        },
+        {
+            "label": "not at all -5",
+            "colour": "#76ed54"
         }
     ]
 }

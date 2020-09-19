@@ -926,7 +926,7 @@ class SliceFigure:
             #GET FIRST SLICE OF STACK B TRANS. MATRIX
 
             #If scan is any of following then use DWI transformation matrix but keep rest same
-            adc_scan_types = ["adc", "adcq", "adcq-res", "adc-res", "cdwi-1400", "cqdwi-1400", "kurtosis"]
+            adc_scan_types = ["adc", "adcq", "adcq-res", "adc-res", "cdwi-1400", "cqdwi-1400", "kurtosis", "contrast-tra"]
             alternative_scan_type = "dwi-100_800_1000"
 
             if self.figure_information['scan type'] in adc_scan_types: #check that the synchronisee tab is not in these, if is then use dwi
