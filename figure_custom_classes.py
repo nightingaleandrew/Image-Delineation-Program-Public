@@ -1,8 +1,6 @@
 #File for classes regarding the figure. For instance Hover, MouseClick or Intersector.
 
 #imports
-# import tkinter as tk
-# import tkinter.ttk as ttk
 import numpy as np, os
 
 import matplotlib
