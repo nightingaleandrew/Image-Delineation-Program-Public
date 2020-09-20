@@ -39,8 +39,8 @@ custom_btn_images = [{"name": 'Jump to First Slice', "file": r"./images/start_ic
                     #Source: Schoger, S. Tag Icon: Heroicons UI [Online]. [Accessed 08 August 2020]. Available at:https://www.iconfinder.com/icons/2867944/tag_icon
                     #license - MIT license stating free for commerical use
 
-                    {"name": 'Refresh Polygons', "file": r"./images/refresh_icon.png", "zoom": 22},
-                    #Source: Designerz Base. Refresh, sync icon [Online]. [Accessed 08 August 2020]. Available at:https://www.iconfinder.com/icons/186390/refresh_sync_icon
+                    {"name": 'Refresh Polygons', "file": r"./images/refresh_icon.png", "zoom": 25},
+                    #Source: Designerz Base. Refresh icon [Online]. [Accessed 20 September 2020]. Available at:https://www.iconfinder.com/icons/216529/refresh_icon
                     #license - Mentions that it is "Free for commerical use"
                     {"name": "Polygons Hidden", "file": r"./images/polygons_hidden_icon.png", "zoom": 24},
                     #Source: Becris.  hide [Online]. [Accessed 13 September 2020]. Available at:https://www.flaticon.com/free-icon/private_876769?term=eye%20hide&page=1&position=5
