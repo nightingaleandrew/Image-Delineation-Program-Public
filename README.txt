@@ -9,7 +9,7 @@
 **Instructions**
 1) Please check and confirm the filename for loading the stacks within file_locations.py file. Please point this to the proc folder.
     eg. r"C:/Users/Andrew/Documents/dissertation/data/proc"
-2) Run Main.py
+2) Run main.py
 
 **IMPORTS USED**
 - Below are the imports I have used and would be best to have installed to be able to run the main.py file.
