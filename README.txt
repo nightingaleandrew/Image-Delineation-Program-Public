@@ -4,12 +4,12 @@
 **STRUCTURE OF & VIEWING THE PROJECT**
 - Run the program through main.py
 - This runs a tkinter interface that takes advantage of the Tkinter framework.
-- The password to enter is: " " (a single space)
 
 **Instructions**
-1) Please check and confirm the filename for loading the stacks within file_locations.py file. Please point this to the proc folder.
-    eg. r"C:/Users/Andrew/Documents/dissertation/data/proc"
+1) Please check and confirm the filename for loading the stacks within file_locations.py file. Please point this to the 'proc' folder.
+    eg. r"C:/Users/Andrew/Documents/data/proc"
 2) Run main.py
+3) If a password is required then please check main.py (hard coded password is: "" (no char))
 
 **IMPORTS USED**
 - Below are the imports I have used and would be best to have installed to be able to run the main.py file.

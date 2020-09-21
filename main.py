@@ -1387,8 +1387,6 @@ class Polygons(SliceFigure):
         self.parent.check_and_send_trans_polygons()  #Need to call after original hover, as this resets the hover
 
 
-
-
     #Draw btn is clicked - calls add vertex method
     #FUTURE DEVELOPMENT - Create add vertex Class to do this
     def draw_btn_click(self, event, tag):
