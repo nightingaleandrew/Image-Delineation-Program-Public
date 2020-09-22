@@ -62,7 +62,7 @@ PASSWORD = "" #security is not a central functional requirement in this program 
 
 #OTHER
 FILETYPES_ACCEPTED = {".npy": True, ".png": False, ".jpg": False} #again linking to the fact to make program any img orientated
-NPY_FILES_TYPES_NOT_WANTED = ["nor", "sus"]
+NPY_FILES_TYPES_NOT_WANTED = ["nor", "sus"] #these are typically at the end of .npy array filename and relate to a different version of that file
 IMG_COLOURMAP = 'gray' #viridis is default, for instance if non gray imgs were to be allowed
 MASK_COLOUR_OR_BLACK_WHITE = True #if this is false then mask produced will be black or white.
 
@@ -1968,7 +1968,7 @@ class Polygons(SliceFigure):
                 self.file_writer.remove_record(current_data, id) #remove the record for polygon from the up to date file
 
                 #remove from dict
-                self.polygon_info = [item for item in self.polygon_info if item['id'] != id] #remove from self.polygon info #https://stackoverflow.com/questions/33190779/how-to-delete-a-dictionary-from-a-list-of-dictionaries
+                self.polygon_info = [item for item in self.polygon_info if item['id'] != id] #remove from self.polygon info #hiro protagonist. (2015) How to delete a dictionary from a list of dictionaries [Online]. Available at: https://stackoverflow.com/questions/33190779/how-to-delete-a-dictionary-from-a-list-of-dictionaries [Accessed: 03 September 2020].
 
                 #text to tell user was successfully deleted
                 self.update_information("Polygon with Id: {} successfully deleted.".format(str(id)), "positive") #information line to let user know that the polygon has been removed
@@ -2099,7 +2099,7 @@ class Notebox(SliceFigure):
                                                                                                                                             "file_sub_extension": {"validator_key": "slice notes", "validator_val": False, "key_val_to_append_to": "slice notes", "level": None},
                                                                                                                                             "table_width": 665
                                                                                                                                             },
-                            {"name": "Polygon", "radio_name": "Selected Polygon", "file_location": self.slice_name + "_polygon_slice_notes", "table_col_settings":[{"column": "id", "wraplength":15, "side": "left", "width": 4, "fill": False, "btns": None},
+                            {"name": "Polygon", "radio_name": "Polygon", "file_location": self.slice_name + "_polygon_slice_notes", "table_col_settings":[{"column": "id", "wraplength":15, "side": "left", "width": 4, "fill": False, "btns": None},
                                                                                                                                                                     {"column": "user", "wraplength":90, "side": "left", "width": 15, "fill": False},
                                                                                                                                                                     {"column": "note", "wraplength":285, "side": "left", "width": 40, "fill": False},
                                                                                                                                                                     {"column": "date", "wraplength":100, "side": "left", "width": 10, "fill": False},
@@ -2198,13 +2198,13 @@ class Notebox(SliceFigure):
     #If no polygon is selected then disable radio button - relates just to selected polygon
     def no_polygon_selected_reset(self):
         if self.selected_polygon == None: #self.selected polygon should be None
-            self.note_type.set(None) #deselects the radiobutton if value outside of values possible  #https://stackoverflow.com/questions/43403653/how-to-deselect-a-radio-button-tkinter
+            self.note_type.set(None) #deselects the radiobutton if value outside of values possible  #Novel. (2017) How to deselect a radio button tkinter [Online]. Available at: https://stackoverflow.com/questions/43403653/how-to-deselect-a-radio-button-tkinter [Accessed 02 September 2020]
 
-            self.change_radio_btn_text_and_status("Selected Polygon", 'disabled', "Selected Polygon") #disable the selected polygon radio btn to Selected Polygon
+            self.change_radio_btn_text_and_status("Polygon", 'disabled', "No Polygon Selected") #disable the selected polygon radio btn to become No Polygon Selected. Came out of User Testing this this was not clear enough to the user despite being disabled (used to say polygon selected)
 
-            self.customise_note_widget_text("Selected Polygon", "No Polygon Selected") #Add a customised msg as it normally says No Notes Added
+            self.customise_note_widget_text("Polygon", "No Polygon Selected") #Add a customised msg as it normally says No Notes Added
 
-            self.set_tab_name("Selected Polygon", "Polygon Notes") #reset the tab to Polygon Notes
+            self.set_tab_name("Polygon", "Polygon Notes") #reset the tab to Polygon Notes
 
     #When the current slice is changed, the current slice in this class is updated.
     def update_slice_name(self, new_slice_name):
@@ -2218,7 +2218,7 @@ class Notebox(SliceFigure):
                 item['file_location'] = self.slice_name + "_polygon_slice_notes"
                 item['file_sub_extension']['level']['validator_val'] = -1 #reset to -1 as this will fail validation
 
-        self.refresh_tabs_manually(['Current Slice', 'Selected Polygon'])
+        self.refresh_tabs_manually(['Current Slice', 'Polygon'])
 
         self.no_polygon_selected_reset() #disable the polygon radio button
 
@@ -2227,18 +2227,18 @@ class Notebox(SliceFigure):
         self.selected_polygon = polygon
         if self.selected_polygon != None:
              #set the tab name for polygon notes to be following
-            self.set_tab_name("Selected Polygon", "Polygon Notes: Id: " + str(self.selected_polygon['id']) + " Tag: " + self.selected_polygon['tag'])
+            self.set_tab_name("Polygon", "Polygon Notes: Id: " + str(self.selected_polygon['id']) + " Tag: " + self.selected_polygon['tag'])
 
             #update the validator value for the dict above
             for item in self.note_types:
-                if item['radio_name'] == "Selected Polygon":
+                if item['radio_name'] == "Polygon":
                     item['file_sub_extension']['level']['validator_val'] = self.selected_polygon['id'] #it's default above is -1 which can never be an id and will therefore not be found when runs if this does not work
 
             #change the name of the selected polygon
-            self.change_radio_btn_text_and_status("Selected Polygon", 'normal', "Polygon ID: " + str(self.selected_polygon['id'])) #normalise radio btn for selected polygon & id into name
+            self.change_radio_btn_text_and_status("Polygon", 'normal', "Polygon ID: " + str(self.selected_polygon['id'])) #normalise radio btn for selected polygon & id into name
 
             #only refresh notes for table that note has been added for
-            self.refresh_tab("Selected Polygon") #refresh the polygon tab for notes as the selected polygon has changed
+            self.refresh_tab("Polygon") #refresh the polygon tab for notes as the selected polygon has changed
         else:
             self.no_polygon_selected_reset()
 
