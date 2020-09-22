@@ -90,19 +90,28 @@ Matplotlib
 
 ** KNOWN ISSUES/BUGS ** (ids link to report Going Forwards section)
 - ID 1: Hover tooltip for polygon information still shows when polygons hidden on slice
-  Details: When the polygons have been hidden from view, the hover tooltips are still apparent on the figure if the vertex position is hovered over.
+  Current Result: When the polygons have been hidden from view, the hover tooltips are still apparent on the figure if the vertex position is hovered over.
+  Expected Result: Tooltips should not be visible.
 
 - ID 2: Stack stated as synchronised when not synchronised
-  Details: When the synchronisation has failed for a particular stack but other target stacks available are synchronised then the button of the failed stack still remains synchronised status.
+  Current Result: When the synchronisation has failed for a particular stack but other target stacks available are synchronised then the button of the failed stack still remains synchronised status.
+  Expected Result: If the synchronisation has failed then, for that stack it should not appear synchronised. No changes should be made to the status of the button for failed stacks.
 
 - ID 3: Adding, Removing, Editing polygon under synchronisation does not replicate changes in synchronised target stacks unless there is de-sync & re-sync. 
-  Details: If the radiologist edits, adds or removes a polygon from the synchroniser stack then the polygon does not replicate in the target stacks. This change does not even happen under figure refresh of the target stack. It requires a cancellation of the synchronisation & a re-synchronisation.
+  Current Result: If the radiologist edits, adds or removes a polygon from the synchroniser stack then the polygon does not replicate in the target stacks. This change does not even happen under figure refresh of the target stack. It requires a cancellation of the synchronisation & a re-synchronisation.
+  Expected Result:The polygon changes should immediately transfer over to all target stacks.
 
 - ID 4: numpy.linalg.LinAlgError occurs when synchronising stacks
-  Details: If two stacks are loaded for instance t2-axial & adc-res and synchronise is clicked on t2-axial is clicked then a “numpy.linalg.LinAlgError: Last 2 dimensions of the array must be square error”
+  Current Result: If two stacks are loaded for instance t2-axial & adc-res and synchronise is clicked on t2-axial is clicked then a “numpy.linalg.LinAlgError: Last 2 dimensions of the array must be square error”
+  Expected Result: Synchronisation should occur correctly – or fail, if failure is the correct result.
 
 - ID 5: Not possible to change point location in certain cases when editing vertex location.
-  Details: Upon editing the vertex of a polygon, when selected the new plot position, the plot does not move. Message updates to say it was successful.
+  Current Result: Upon editing the vertex of a polygon, when selected the new plot position, the plot does not move. Message updates to say it was successful.
+  Expected Result: Plot should move.
+
+- ID 6: Synchronisation between Contrast-tra & t1-axial brings up no matrix available error despite matrices available for P139
+  Current Result: Upon synchronising the two stacks mentioned above, an error dialog box appears saying that synchronisation was not possible due to no matrix for either stack being available
+  Expected Result: Matrices are available and stacks should synchronise.
 
 
 **OTHER NOTES:**
