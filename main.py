@@ -62,6 +62,7 @@ PASSWORD = "" #security is not a central functional requirement in this program 
 
 #OTHER
 FILETYPES_ACCEPTED = {".npy": True, ".png": False, ".jpg": False} #again linking to the fact to make program any img orientated
+NPY_FILES_TYPES_NOT_WANTED = ["nor", "sus"]
 IMG_COLOURMAP = 'gray' #viridis is default, for instance if non gray imgs were to be allowed
 MASK_COLOUR_OR_BLACK_WHITE = True #if this is false then mask produced will be black or white.
 
@@ -417,7 +418,14 @@ class PageOne(tk.Frame):
                 for filetype, accepted in FILETYPES_ACCEPTED.items(): #above True or False can be placed against each file type such as .npy or .jpg (filetype is extension & accepeted boolean)
                     if accepted:
                         if item.endswith(filetype): #has to be a file allowed
-                            possible_images.append(str(item)) #store the files in (keep extension as later on differentiate between .npy and .jpg to load)
+
+                            item_wo_ext =  item[:-len(filetype)] #Here I am checking that the images are not sus or nor & the images that are sent through are correct. This is something that is only applicable to the MRI Slices
+                            allowed = True #Use a simple change of bool structure, if it does end with nor or sus then this changes to False & the img won't be added to the final list
+                            for type in NPY_FILES_TYPES_NOT_WANTED:
+                                if item_wo_ext.endswith(type):
+                                    allowed = False
+                            if allowed:
+                                possible_images.append(str(item)) #store the files in (keep extension as later on differentiate between .npy and .jpg to load)
 
             #if there are allowed files in the folder
             if len(possible_images) > 0:
