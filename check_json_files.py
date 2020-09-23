@@ -22,7 +22,7 @@ class SetSettings:
 
     def prepare_settings(self):
         #Hardcoded default settings I have provided
-        SETTINGS = [{"setting": "Precision", "category": "polygons", "configuable": True, "default_value": 5, "type": "number", "task": "Change Precision"},
+        SETTINGS = [{"setting": "Precision", "category": "polygons", "configuable": True, "default_value": 2, "type": "number", "task": "Change Precision"},
                         {"setting": "Line Thickness", "category": "polygons", "configuable": True, "default_value": 4, "type": "number", "task": "Change Line Thickness"},
                         {"setting": "Unknown Tag Colour", "category": "polygons", "configuable": True, "default_value": "#FFC0CB", "type": "color", "task": "Choose Unknown Tag Colour"},
                         {"setting": "Selected Polygon Colour", "category": "polygons", "configuable": True, "default_value": "#0000FF", "type": "color", "task": "Choose Selected Polygon Colour"},

@@ -45,7 +45,7 @@ custom_btn_images = [{"name": 'Jump to First Slice', "file": r"./images/start_ic
                     {"name": "Polygons Hidden", "file": r"./images/polygons_hidden_icon.png", "zoom": 24},
                     #Source: Becris.  hide [Online]. [Accessed 13 September 2020]. Available at:https://www.flaticon.com/free-icon/private_876769?term=eye%20hide&page=1&position=5
                     #license - Mentions that it is free to use for commerical purposes aslong as there is attribution which is above.
-                    {"name": "Create Mask", "file": r"./images/mask_icon_2.png", "zoom": 20}
+                    {"name": "Create Mask", "file": r"./images/mask_icon.png", "zoom": 20}
                     #Source: Canva. [Online]. [Accessed 05 September 2020]. Available at:https://www.canva.com/
                     #license - Mentions that free icons on Cavna to create own icon are free to be used for commerical purposes https://about.canva.com/license-agreements/free-media/
                     ]

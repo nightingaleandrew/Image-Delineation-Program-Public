@@ -4,7 +4,7 @@
             "setting": "Precision",
             "category": "polygons",
             "configuable": true,
-            "default_value": 5,
+            "default_value": 2,
             "type": "number",
             "task": "Change Precision"
         },
