@@ -49,25 +49,26 @@ from button_images import custom_btn_images
 #In the settings json file only the config & default values can be changed. They need to be changed before the program is loaded. Any changes within the program will be temporary for the session.
 from check_json_files import SetSettings, TagFileLoader
 
-#NON CONFIG SETTINGS
+#CONFIG SETTINGS
+import config
 
 #TERMINOLOGY
 #I will gradually move the program so Slice is removed from terminology throughout. This is a post project development to allow it to be used for not just MRI Slices but any images
-EACH_FILE_NAME = "MRI Slice"
-GROUP_OF_FILES_NAME = "MRI Stack"
+# EACH_FILE_NAME = "MRI Slice"
+# GROUP_OF_FILES_NAME = "MRI Stack"
 
 #SECURITY
-PASSWORD_REQUIRED = False #if password is not required then just requires a username
-PASSWORD = "" #security is not a central functional requirement in this program as files are on machine anyway.
+# PASSWORD_REQUIRED = False #if password is not required then just requires a username
+# PASSWORD = "" #security is not a central functional requirement in this program as files are on machine anyway.
 
 #OTHER
-FILETYPES_ACCEPTED = {".npy": True, ".png": False, ".jpg": False} #again linking to the fact to make program any img orientated
-NPY_FILES_TYPES_NOT_WANTED = ["nor", "sus"] #these are typically at the end of .npy array filename and relate to a different version of that file
-IMG_COLOURMAP = 'gray' #viridis is default, for instance if non gray imgs were to be allowed
-MASK_COLOUR_OR_BLACK_WHITE = True #if this is false then mask produced will be black or white.
+# FILETYPES_ACCEPTED = {".npy": True, ".png": False, ".jpg": False} #again linking to the fact to make program any img orientated
+#NPY_FILES_TYPES_NOT_WANTED = ["nor", "sus"] #these are typically at the end of .npy array filename and relate to a different version of that file
+#IMG_COLOURMAP = 'gray' #viridis is default, for instance if non gray imgs were to be allowed
+#MASK_COLOUR_OR_BLACK_WHITE = True #if this is false then mask produced will be black or white.
 
-SYNCHRONISATION = True #if synchronisation is on for this program
-DISREGARD_TRANSLATED_POLYGONS_WITH_GT_3_SLICE_NUMS = False #if the slices for the translated polygon extend over 3 different numbers, show/hide polygon altogether
+#SYNCHRONISATION = True #if config.SYNCHRONISATION is on for this program
+#DISREGARD_TRANSLATED_POLYGONS_WITH_GT_3_SLICE_NUMS = False #if the slices for the translated polygon extend over 3 different numbers, show/hide polygon altogether
 
 #CONFIGUABLE SETTINGS
 #These are the settings that are used for the program while it is live such as line thickness & precision. The settings above (not including Password) will gradually be added in as program moves along
@@ -154,7 +155,7 @@ class StartPage(tk.Frame):
         self.main = self.window_layout.create_main() #create main & get this obj
 
         #Login Frame
-        self.password_details = {"required": PASSWORD_REQUIRED, "password": PASSWORD}
+        self.password_details = {"required": config.PASSWORD_REQUIRED, "password": config.PASSWORD}
         self.login = LoginFrame(self, self.main, colour_scheme['main_bg'], colour_scheme['font_col'], self.password_details) #set up the login frame
 
         #Last User label
@@ -298,7 +299,7 @@ class PageOne(tk.Frame):
 
         #NON LAYOUT / WIDGET CLASS VARIABLES
         self.synchronised_figures = [] #fills if any figures on PageOne are synchronised.
-        #I have done it at this level as there could be multiple different synchronisations. A sync can happen between tabs of same patient & year. Therefore if multiple patients & years open then possible multiple syncs
+        #I have done it at this level as there could be multiple different config.SYNCHRONISATIONs. A sync can happen between tabs of same patient & year. Therefore if multiple patients & years open then possible multiple syncs
 
         self.file_directory = None #this is set when the first stack is loaded, the program tests if the directory exists when it loads a stack. Can then use this going forward
 
@@ -415,13 +416,13 @@ class PageOne(tk.Frame):
             #collect the images contained in the folder if there are any
             possible_images = []
             for item in os.listdir(folder_selected):
-                for filetype, accepted in FILETYPES_ACCEPTED.items(): #above True or False can be placed against each file type such as .npy or .jpg (filetype is extension & accepeted boolean)
+                for filetype, accepted in config.FILETYPES_ACCEPTED.items(): #above True or False can be placed against each file type such as .npy or .jpg (filetype is extension & accepeted boolean)
                     if accepted:
                         if item.endswith(filetype): #has to be a file allowed
 
                             item_wo_ext =  item[:-len(filetype)] #Here I am checking that the images are not sus or nor & the images that are sent through are correct. This is something that is only applicable to the MRI Slices
                             allowed = True #Use a simple change of bool structure, if it does end with nor or sus then this changes to False & the img won't be added to the final list
-                            for type in NPY_FILES_TYPES_NOT_WANTED:
+                            for type in config.NPY_FILES_TYPES_NOT_WANTED:
                                 if item_wo_ext.endswith(type):
                                     allowed = False
                             if allowed:
@@ -449,7 +450,7 @@ class PageOne(tk.Frame):
                 self.unlock_comparison_stacks_btn() #enable the load second stack button as will always be one stack open. Future Development - this would be done dynanmically
 
             else: #if there are no files in the directory that are allowed for the program
-                messagebox.showerror("Error Loading " + GROUP_OF_FILES_NAME, "There are no viewable files available within this folder.") #there were no images of the type desired in the folder
+                messagebox.showerror("Error Loading " + config.GROUP_OF_FILES_NAME, "There are no viewable files available within this folder.") #there were no images of the type desired in the folder
         except FileNotFoundError:
             print("Directory not chosen.") #If directory is not chosen by user.
         except:
@@ -521,7 +522,7 @@ class PageOne(tk.Frame):
         #FUTURE DEVELOPMENT
         #- transfer current slice over as will refresh to start slice
         #- transfer 'state' of figure eg. if polygon selected etc - transfer over
-        #- not tested with synchronisation on
+        #- not tested with config.SYNCHRONISATION on
 
     #Function that resets the screen to one notebook, of course comparison_open would be set to false
     def reset_to_one_notebook(self):
@@ -562,9 +563,9 @@ class PageOne(tk.Frame):
         notebook_frame['slice_information'].make_box_go_walkies() #forget the slice_information box which is attached to this notebook
         notebook_frame['slice_information'] = None
 
-    #SYNCHRONISATION METHODS
-    #if synchronisation is clicked then this method from SliceFigure is called (parent is passed through when SliceFigure is called)
-    #figure_information is passed though of which tab is clicked for synchronisation
+    #config.SYNCHRONISATION METHODS
+    #if config.SYNCHRONISATION is clicked then this method from SliceFigure is called (parent is passed through when SliceFigure is called)
+    #figure_information is passed though of which tab is clicked for config.SYNCHRONISATION
     def sync_tabs(self, figure_information):
       #FIND OTHER TABS THAT SATISFY SAME YEAR & PATIENT DATA
       if len(self.current_figures) > 1: #If there are multiple figures present
@@ -633,25 +634,25 @@ class PageOne(tk.Frame):
                       #     print("\n")
                       #     print("SLICE", slice)
 
-                # except: #if there is any error regarding synchronisation such as if transformation matrices that are needed have not been found
+                # except: #if there is any error regarding config.SYNCHRONISATION such as if transformation matrices that are needed have not been found
                 #     print("ERROR_SYNC_F")
-                #     print("There was an error with syncrhonising tabs. Synchronisation not completed. ")  #Theres not two tabs open with the same patient & year. Let user know
-                #     messagebox.showerror("Synchronisation not possible", "An error has occured when synchronising. Synchronsing has not been completed", icon='error')
+                #     print("There was an error with syncrhonising tabs. config.SYNCHRONISATION not completed. ")  #Theres not two tabs open with the same patient & year. Let user know
+                #     messagebox.showerror("config.SYNCHRONISATION not possible", "An error has occured when synchronising. Synchronsing has not been completed", icon='error')
                 #     return None
 
 
             else: #as there are no transformation matrices for the syncrhonising tab. Please refer to explanation above.
                 print("The synchronising tab scan type has no transformation matrices available. ")  #Theres not two tabs open with the same patient & year. Let user know
-                messagebox.showerror("Synchronisation not possible", "The synchronising tab's scan type has no transformation matrices available for this year and patient.", icon='error')
+                messagebox.showerror("SYNCHRONISATION not possible", "The synchronising tab's scan type has no transformation matrices available for this year and patient.", icon='error')
                 return None
 
         else:
             print("Needs to be at least two tabs open with the same patient & same year. ")  #Theres not two tabs open with the same patient & year. Let user know
-            messagebox.showerror("Synchronisation not possible", "At least two tabs with the same patient and year need to be open to syncrhonise.", icon='error')
+            messagebox.showerror("SYNCHRONISATION not possible", "At least two tabs with the same patient and year need to be open to syncrhonise.", icon='error')
             return None
       else:
           print("Needs to be at least two tabs open with the same patient & same year. ") #Theres not two tabs open. Let user know
-          messagebox.showerror("Synchronisation not possible", "At least two tabs with the same patient and year need to be open to syncrhonise.", icon='error')
+          messagebox.showerror("SYNCHRONISATION not possible", "At least two tabs with the same patient and year need to be open to syncrhonise.", icon='error')
           return None
 
       #SYNCHRONISE STACKS CODE
@@ -662,7 +663,7 @@ class PageOne(tk.Frame):
           # 5) multiply inverse with 3.
           # 6) new z value is offset of slice num for which matrix was used in target stack
 
-    #If a tab in unsynchronised. Reset btn, & status of tab. Remove synchronisation from the list of synchronisations. Again called by SliceFigure
+    #If a tab in unsynchronised. Reset btn, & status of tab. Remove SYNCHRONISATION from the list of SYNCHRONISATIONs. Again called by SliceFigure
     def unsync_tabs(self, figure_information):
         for figure in self.current_figures:
             if (figure.figure_information['patient'] == figure_information['patient'] and figure.figure_information['year'] == figure_information['year']): #check validation of details
@@ -701,7 +702,7 @@ class SliceFigure:
 
 
 
-        self.intro_label_frm_txt = GROUP_OF_FILES_NAME + ":" #intro text to the label frame, group files name is MRI STACK
+        self.intro_label_frm_txt = config.GROUP_OF_FILES_NAME + ":" #intro text to the label frame, group files name is MRI STACK
         self.synchronised_status = False #This is changed if the figure is synced
         self.selected_polygon = None #this is updated by child classes such as Polygons to then let Notebox know that a polygon is selected
 
@@ -757,7 +758,7 @@ class SliceFigure:
         #SYNCHRONISE BTN (INSIDE HEADER - RIGHT)
         self.sync_btn = tk.Button(header_frame, text="Synchronise", command=self.synchronise, width=13) #I have set the width of this button as text changes
 
-        if SYNCHRONISATION: #if synchronisation is false then the message board pushes over to the right hand side. For instance for delineating images where sync not wanted
+        if config.SYNCHRONISATION: #if SYNCHRONISATION is false then the message board pushes over to the right hand side. For instance for delineating images where sync not wanted
             self.sync_btn.pack(side="right")
             self.sync_tooltip = HoverToolTip(self.sync_btn, colour_scheme['hover_bg'], fonts['small_font'], "Sync Stacks\nPatient: " + self.figure_information['patient']) #tooltip for the synchronise btn
 
@@ -874,10 +875,10 @@ class SliceFigure:
 
                         self.synchronised_status = True
                         self.synchronise_stack(sync) #synchronise stack
-                    except: #if there is any error regarding synchronisation such as if transformation matrices that are needed have not been found
+                    except: #if there is any error regarding config.SYNCHRONISATION such as if transformation matrices that are needed have not been found
                         print("ERROR_SYNC_H")
-                        print("There was an error with syncrhonising tabs. Synchronisation not completed. ")  #Theres not two tabs open with the same patient & year. Let user know
-                        messagebox.showerror("Synchronisation not possible", "An error has occured when synchronising. Synchronsing has not been completed", icon='error')
+                        print("There was an error with syncrhonising tabs. SYNCHRONISATION not completed. ")  #Theres not two tabs open with the same patient & year. Let user know
+                        messagebox.showerror("SYNCHRONISATION not possible", "An error has occured when synchronising. Synchronsing has not been completed", icon='error')
                         return None
 
     #FIGURE, CANVAS, AXIS METHODS
@@ -897,7 +898,7 @@ class SliceFigure:
              read_slice = mpimg.imread(slice_address) #for loading an image eg in jpg or png format
 
         if read_slice.all() != None:
-            self.a.imshow(read_slice, cmap=IMG_COLOURMAP) #show the fig, cmap relates to the setting set above. It is set at gray
+            self.a.imshow(read_slice, cmap=config.IMG_COLOURMAP) #show the fig, cmap relates to the setting set above. It is set at gray
 
             #this is for having the filename in the save fig dialog box
             self.canvas.get_default_filename = lambda: self.current_slice_name_getter() + "_img" #used img as ending to differentiate with files of same name. It will automatically look to save as .png
@@ -948,7 +949,7 @@ class SliceFigure:
 
             if self.figure_information['scan type'] in adc_scan_types: #check that the synchronisee tab is not in these, if is then use dwi
                 matrix_dir = self.folder_selected[:-len(self.figure_information['scan type'])] + alternative_scan_type #get dwi directory
-                matrix_slice_file_used = None #if this is passed through below it will fail Try Except on synchronisation & therefore fail whole process.
+                matrix_slice_file_used = None #if this is passed through below it will fail Try Except on config.SYNCHRONISATION & therefore fail whole process.
                 slice_json_file = self.slice_list[0][:-4] #KEPT TO ADC for now
 
                 for item in os.listdir(matrix_dir): #use dwi directory
@@ -979,7 +980,7 @@ class SliceFigure:
                     translated_polygon = translater.translate_polygon() #get the new translated cooridnates
                     translated_polygon = {"slice": "Translated " + polygon['slice'], "id": "Translated " + str(polygon['id']), "tag": polygon['tag'], "co-ordinates": translated_polygon} #I have included the translated wording for the hovertip
 
-                    self.translated_polygons.append(translated_polygon) #append this translated polygons to a global variable for class. This variable can only be filled by one synchronisation at any one time
+                    self.translated_polygons.append(translated_polygon) #append this translated polygons to a global variable for class. This variable can only be filled by one config.SYNCHRONISATION at any one time
 
             #FIND SLICE NUMBERS USING z VALUE of TRANSLATED COORDINATES OF EACH POLYGON
             for polygon in self.translated_polygons:
@@ -1012,7 +1013,7 @@ class SliceFigure:
                 polygon_z_coords = sorted(polygon_z_coords)
 
                 #if there are more than 3 numbers then disregard slice numbers
-                if DISREGARD_TRANSLATED_POLYGONS_WITH_GT_3_SLICE_NUMS: #this is a global variable that is set program wide
+                if config.DISREGARD_TRANSLATED_POLYGONS_WITH_GT_3_SLICE_NUMS: #this is a global variable that is set program wide
                     if len(polygon_z_coords) > 3: #this variable could be set program wide
                         polygon_z_coords = []
 
@@ -2032,7 +2033,7 @@ class Polygons(SliceFigure):
         try:
             if file != None:
                 masked_image = PolygonMasker(coordinates, file) #call the masking class
-                image = masked_image.apply_mask(MASK_COLOUR_OR_BLACK_WHITE) #apply the mask
+                image = masked_image.apply_mask(config.MASK_COLOUR_OR_BLACK_WHITE) #apply the mask
                 filename = filedialog.asksaveasfile(mode='w', #write
                                                     initialfile="Polygon ID " + str(polygon["id"]) + " Mask " + self.slice_name, #default placeholder save text
                                                     title="Save Mask of Slice: " + self.slice_name +", Polgon: " + str(polygon["id"]), #title of dialog
