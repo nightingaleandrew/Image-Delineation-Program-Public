@@ -37,6 +37,9 @@ Matplotlib
 
 
 **.json FILE SUMMARIES IN DIR:**
+#config.py 
+- Contains configurable variables for the program for instance if password required required or not.
+
 #settings.json
 - Contains default settings used for the program such as precision or line thickness
 - Settings can be changed here and imported in, if mistakes are made such as key text changes then the program will default to the default setting
