@@ -49,40 +49,14 @@ from button_images import custom_btn_images
 #In the settings json file only the config & default values can be changed. They need to be changed before the program is loaded. Any changes within the program will be temporary for the session.
 from check_json_files import SetSettings, TagFileLoader
 
-#CONFIG SETTINGS
+#CONFIG SETTINGS inc security, terminology, synchronisation features
 import config
-
-#TERMINOLOGY
-#I will gradually move the program so Slice is removed from terminology throughout. This is a post project development to allow it to be used for not just MRI Slices but any images
-# EACH_FILE_NAME = "MRI Slice"
-# GROUP_OF_FILES_NAME = "MRI Stack"
-
-#SECURITY
-# PASSWORD_REQUIRED = False #if password is not required then just requires a username
-# PASSWORD = "" #security is not a central functional requirement in this program as files are on machine anyway.
-
-#OTHER
-# FILETYPES_ACCEPTED = {".npy": True, ".png": False, ".jpg": False} #again linking to the fact to make program any img orientated
-#NPY_FILES_TYPES_NOT_WANTED = ["nor", "sus"] #these are typically at the end of .npy array filename and relate to a different version of that file
-#IMG_COLOURMAP = 'gray' #viridis is default, for instance if non gray imgs were to be allowed
-#MASK_COLOUR_OR_BLACK_WHITE = True #if this is false then mask produced will be black or white.
-
-#SYNCHRONISATION = True #if config.SYNCHRONISATION is on for this program
-#DISREGARD_TRANSLATED_POLYGONS_WITH_GT_3_SLICE_NUMS = False #if the slices for the translated polygon extend over 3 different numbers, show/hide polygon altogether
 
 #CONFIGUABLE SETTINGS
 #These are the settings that are used for the program while it is live such as line thickness & precision. The settings above (not including Password) will gradually be added in as program moves along
 settings_file = SetSettings(file_locations['settings'])
 SETTINGS = settings_file.settings
 
-#Storage ** In phase II I would set it up so this can be set centrally **
-#GOING FORWARDS - if needed. Setup db & test throughout adding/removing/editing records
-# MAKE_DB = False #**PLEASE DON'T MAKE TRUE AS WAS DISCONTINUED EARLY ON**
-# MAKE_JSON = True #for saving to json
-
-
-
-#CLASSES
 
 #MAIN APP
 #Main App that controls which frame or page is shown - either Start Page or Page One. Frame is not changed by changing window. It is a tk.raise on the frame.

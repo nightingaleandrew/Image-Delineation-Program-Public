@@ -5,7 +5,7 @@
 EACH_FILE_NAME = "MRI Slice"
 GROUP_OF_FILES_NAME = "MRI Stack"
 
-#SECURITY - This not a real security risk :) 
+#SECURITY - This not a real security risk :)
 PASSWORD_REQUIRED = False #if password is not required then just requires a username
 PASSWORD = "" #security is not a central functional requirement in this program as files are on machine anyway.
 
@@ -17,3 +17,8 @@ MASK_COLOUR_OR_BLACK_WHITE = True #if this is false then mask produced will be b
 
 SYNCHRONISATION = True #if synchronisation is on for this program
 DISREGARD_TRANSLATED_POLYGONS_WITH_GT_3_SLICE_NUMS = False #if the slices for the translated polygon extend over 3 different numbers, show/hide polygon altogether
+
+#Storage ** In phase II I would set it up so this can be set centrally **
+#GOING FORWARDS - if needed. Setup db & test throughout adding/removing/editing records
+# MAKE_DB = False #**PLEASE DON'T MAKE TRUE AS WAS DISCONTINUED EARLY ON**
+# MAKE_JSON = True #for saving to json
